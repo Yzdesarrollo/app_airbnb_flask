@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h1 class="text-center">Propiedades de...</h1>
+{% for property in properties %}
+<div class="container">
+    <div class="card" style="width: 18rem;">
+        <img src="{{url_for('static',filename='assets/airbnb.jpeg')}}" alt="img property">
+        <div class="card-body">
+            <h5 class="card-title">{{property['title']}}</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                content.</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><span>Type:</span>{{property['type']}}</li>
+            <li class="list-group-item"><span>Address:</span>{{property['address']}}</li>
+            <li class="list-group-item"><span>Rooms:</span>{{property['rooms']}}</li>
+            <li class="list-group-item"><span>Price:</span>{{property['price']}}</li>
+            <li class="list-group-item">Area:{{property['area']}}&nbsp;<span>m/2</span></li>
+            <li class="list-group-item"><span>Price:$</span>{{property['price']}}</li>
+        </ul>
+        <div class="card-body">
+            <a href="#" class="card-link">Card link</a>
+            <a href="#" class="card-link">Another link</a>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}
