@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h1 class="text-center">Mis Propiedades</h1>
+{% for property in properties %}
+<div class="container">
+    <div class="card" style="width: 18rem;">
+        <div class="card-row">
+            <div class="card-body">
+                <img src="{{url_for('static',filename='assets/casa2.jpg')}}" alt="img property" class="card-img-top">
+                <h5 class="card-title">{{property['title']}}</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><span class="font-weight-bold">Type:</span>{{property['type']}}</li>
+                <li class="list-group-item"><span class="font-weight-bold">Address:</span>{{property['address']}}
+                </li>
+                <li class="list-group-item"><span class="font-weight-bold">Rooms:</span>{{property['rooms']}}</li>
+                <li class="list-group-item"><span class="font-weight-bold">Price:</span>{{property['price']}}</li>
+                <li class="list-group-item"><span
+                        class="font-weight-bold">Area:</span>{{property['area']}}&nbsp;<span>m/2</span></li>
+            </ul>
+            <div>
+                <a href="/editproperty?id={{property['_id']}}" class="btn btn-primary">Actualizar</a>
+                <a href="/deleteproperty?id={{property['_id']}}" class="btn btn-danger">Eliminar</a>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+{% endfor %}
+{% endblock %}

@@ -42,7 +42,7 @@ def addProperty():
     author = request.form['author']
     addData = {"title":title, "type": tp, "address":address, "rooms":rooms,"price":price,"area":area,"image":image,"author":author}
     res = req.post('http://localhost:3000/api/addproperty', json = addData)
-    return redirect(url_for('listProperty'))
+    return redirect(url_for('listPropertyuser'))
 
 @app.route('/listproperties')
 def listProperty():
@@ -52,6 +52,15 @@ def listProperty():
     # aleatorio = random.choice(img)
     # print(aleatorio)
     return render_template('list-properties.html', properties = result)
+
+@app.route('/listpropertyuser')
+def listPropertyuser():
+    response = req.get('http://localhost:3000/api/listproperties')
+    result = response.json()['res']['data']
+    # img = ['casa1', 'casa2', 'casa3', 'casa4', 'casa5']
+    # aleatorio = random.choice(img)
+    # print(aleatorio)
+    return render_template('list-properties-user.html', properties = result)
 
 @app.route('/editproperty')
 def editProperty():
@@ -75,14 +84,14 @@ def updateProperty():
     addData = {"id":id, "title":title, "type": tp, "address":address, "rooms":rooms,"price":price, "area":area, "image":image, "author":author}
     print('addData =>',addData)
     res = req.put('http://localhost:3000/api/updateproperty', json = addData)
-    return redirect(url_for('listProperty'))
+    return redirect(url_for('listPropertyuser'))
 
 @app.route('/deleteproperty')
 def deleteProperty():
     id = request.args.get('id')
     deleteData = {'id':id}
     response = req.delete(f'http://localhost:3000/api/deleteproperty?id={id}', json = deleteData)
-    return redirect(url_for('listProperty'))
+    return redirect(url_for('listPropertyuser'))
 
 if __name__ == '__main__':
     app.run(debug=True)
